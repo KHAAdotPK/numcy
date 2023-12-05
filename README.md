@@ -3,19 +3,41 @@
 
 ## Classes
 
+## `DimensionsOfArray` Class
+The `DimensionsOfArray` class is a utility class that helps manage dynamically allocated arrays for storing dimensions.
+#### Example Usage:
+```C++
+// A three dimensional array, with six inner arrays, and then each inner array is a single line array(the innermost array)  of 10 columns. 
+cc_tokenizer::string_character_traits<char>::size_type arrayA[] = {2, 3, 10};
+DimensionsOfArray dimsA(array, sizeof(arrayA)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));
+// The dimensions of the array.
+std::cout<< "Size = " << dimsA.size() << std::endl;
+// Number of inner arrays.
+std::cout<< dimsA.getNumberOfInnerArrays() << std::endl;
+
+cc_tokenizer::string_character_traits<char>::size_type arrayB[] = {2, 3, 8};
+DimensionsOfArray dimsB(arrayB, sizeof(arrayB)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));    
+if ( dimsB.compare(dimsA) ) 
+{
+    std::cout<< "They have same number of inner arrays..." << std::endl;
+}
+```
+
 ## `Dimensions` Class
 The `Dimensions` class represents the shape and size of a multi-dimensional array. It holds information about the number of dimensions, size along each dimension, and pointers to previous and next `Dimensions` instances.
 #### Example Usage:
 ```C++
-Dimensions dim = {10, 2, NULL, NULL};
-```
-
-## `DimensionsArray` Class
-The `DimensionsArray` class is a utility class that helps manage dynamically allocated arrays for storing dimensions.
-#### Example Usage:
-```C++
-DimensionsArray dimsArray(3); // Create an array for 3 dimensions
-Dimensions* dims = dimsArray.allocate(); // Allocate memory for a Dimensions instance
+// Manually initializing a doubly likedlist...
+//  dim -> dim1 -> dim2 -> dim3
+DIMENSIONS dim3 = {10, 3, NULL, NULL};
+DIMENSIONS dim2 = {0, 10, &dim3, NULL};
+dim3.prev = &dim2;
+DIMENSIONS dim1 = {0, 78, &dim2, NULL};
+dim2.prev = &dim1;
+DIMENSIONS dim = {0, 9, &dim1, NULL};
+dim1.prev = &dim;
+std::cout<< "Total number of inner arrays = " << dim.getDimensionsOfArray().getNumberOfInnerArrays() << std::endl;
+std::cout<< "Total number of links = " << dim.getNumberOfLinks() << std::endl;
 ```
 
 ## `Collective` Class
