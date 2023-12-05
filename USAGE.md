@@ -1,7 +1,7 @@
- Numcy
-Numcy class is designed for numerical computing operations, and it includes functionality for array creation, manipulation, and mathematical operations.
+ ## NumCy
+The `Numcy` class is designed for numerical computing operations, and it includes functionality for array creation, manipulation, and mathematical operations.
 
-The following code demonstrates the usage of various Numcy functions, such as zeros, triu, concatenate, dot and printing the results of these operations. 
+The following code demonstrates the usage of various `Numcy` functions, such as zeros, triu, concatenate, dot and printing the results of these operations. 
 ```C++
 /*
     src/main.cpp
