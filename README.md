@@ -27,7 +27,7 @@ if ( dimsB.compare(dimsA) )
 The `Dimensions` class represents the shape and size of a multi-dimensional array. It holds information about the number of dimensions, size along each dimension, and pointers to previous and next `Dimensions` instances.
 #### Example Usage:
 ```C++
-// Manually initializing a doubly likedlist...
+// Manually initializing a doubly linkedlist...
 //  dim -> dim1 -> dim2 -> dim3
 DIMENSIONS dim3 = {10, 3, NULL, NULL};
 DIMENSIONS dim2 = {0, 10, &dim3, NULL};
