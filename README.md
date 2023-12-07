@@ -7,7 +7,18 @@
 The `DimensionsOfArray` class is a utility class that helps manage dynamically allocated arrays for storing dimensions.
 #### Example Usage:
 ```C++
-// A three dimensional array, with six inner arrays(two three-dimensional arrays), and then each inner array is a single line array(the innermost array)  of 10 columns. 
+/*
+    Creating and comparing instances of DimensionsOfArray for two three-dimensional arrays.
+
+    1. Creating array 'arrayA' with dimensions [2][3][10]. A three dimensional array, with six inner arrays(two three-dimensional arrays), and then each inner array is a single line array(the innermost array)  of 10 columns.
+    2. Initializing DimensionsOfArray 'dimsA' with 'arrayA' dimensions.
+    3. Displaying the size (number of dimensions) and the number of inner arrays for 'arrayA'.
+    
+    4. Creating array 'arrayB' with dimensions [2][3][8]. A three dimensional array, with six inner arrays(two  three-dimensional arrays), and then each inner array is a single line array(the innermost array) of 8 columns.
+    5. Initializing DimensionsOfArray 'dimsB' with 'arrayB' dimensions.
+    6. Comparing the number of inner arrays between 'arrayA' and 'arrayB'.
+        - If equal, output a message indicating the similarity.
+*/
 cc_tokenizer::string_character_traits<char>::size_type arrayA[] = {2, 3, 10};
 DimensionsOfArray dimsA(arrayA, sizeof(arrayA)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));
 // Displaying the dimensions of the array and the number of inner arrays.
@@ -19,6 +30,21 @@ if ( dimsB.compare(dimsA) )
 {
     std::cout<< "They have same number of inner arrays..." << std::endl;
 }
+/*
+    Outputting the dimensions of the first three-dimensional array 'arrayA' using the overloaded operator.
+
+    Iterating through each dimension using a loop:
+    - 'dimsA.size()' provides the total number of dimensions.
+    - Printing the ith dimension value using the overloaded 'operator[]'.
+
+    Example:
+    For the array 'arrayA' with dimensions [2][3][10], the output would be: 2 3 10
+*/
+for (size_t i = 0; i < dimsA.size(); i++)
+{
+    std::cout << dimsA[i] << " ";
+}
+std::cout << std::endl;
 ```
 
 ## `Dimensions` Class
