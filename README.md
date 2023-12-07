@@ -7,14 +7,12 @@
 The `DimensionsOfArray` class is a utility class that helps manage dynamically allocated arrays for storing dimensions.
 #### Example Usage:
 ```C++
-// A three dimensional array, with six inner arrays, and then each inner array is a single line array(the innermost array)  of 10 columns. 
+// A three dimensional array, with six inner arrays(two three-dimensional arrays), and then each inner array is a single line array(the innermost array)  of 10 columns. 
 cc_tokenizer::string_character_traits<char>::size_type arrayA[] = {2, 3, 10};
-DimensionsOfArray dimsA(array, sizeof(arrayA)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));
-// The dimensions of the array.
-std::cout<< "Size = " << dimsA.size() << std::endl;
-// Number of inner arrays.
+DimensionsOfArray dimsA(arrayA, sizeof(arrayA)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));
+// Displaying the dimensions of the array and the number of inner arrays.
+std::cout << "Size (number of dimensions) = " << dimsA.size() << std::endl;
 std::cout<< dimsA.getNumberOfInnerArrays() << std::endl;
-
 cc_tokenizer::string_character_traits<char>::size_type arrayB[] = {2, 3, 8};
 DimensionsOfArray dimsB(arrayB, sizeof(arrayB)/sizeof(cc_tokenizer::string_character_traits<char>::size_type));    
 if ( dimsB.compare(dimsA) ) 
