@@ -1,6 +1,13 @@
 # NumCy C++ Library
 `Numcy` is a `C++` library aimed at providing functionalities similar to the popular `Python` `NumPy` library. It offers a set of classes and functions to work with multi-dimensional arrays, perform mathematical operations, and support numerical computing in `C++`.
 
+## Dependencies
+
+Ensure you have the following dependencies cloned into the `./lib` directory before using `NumCy`:
+
+- [string](https://github.com/KHAAdotPK/string.git)
+- [ala_exception](https://github.com/KHAAdotPK/ala_exception.git)
+
 ## Classes
 
 ## `DimensionsOfArray` Class
