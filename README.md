@@ -27,8 +27,25 @@ if ( dimsB.compare(dimsA) )
 The `Dimensions` class represents the shape and size of a multi-dimensional array. It holds information about the number of dimensions, size along each dimension, and pointers to previous and next `Dimensions` instances.
 #### Example Usage:
 ```C++
-// Manually initializing a doubly linkedlist...
-//  dim -> dim1 -> dim2 -> dim3
+/*    
+    Manually initializing a doubly linked list to represent the dimensions
+    of a multi-dimensional array in C/C++.
+
+    The array has the shape [9][78][10][10][3].
+
+    The DIMENSIONS structure is used to define each dimension node,
+    where 'size' represents the size of the dimension, and 'prev' and 'next'
+    pointers establish the doubly linked list connections.
+
+    The linked list is constructed as follows:
+        dim -> dim1 -> dim2 -> dim3
+
+    Each dimension node is initialized with its respective size,
+    and the 'prev' pointers are set to establish the backward connections.
+
+    Example:
+        dim (0, 9) -> dim1 (0, 78) -> dim2 (0, 10) -> dim3 (10, 3)
+*/
 DIMENSIONS dim3 = {10, 3, NULL, NULL};
 DIMENSIONS dim2 = {0, 10, &dim3, NULL};
 dim3.prev = &dim2;
@@ -37,7 +54,15 @@ dim2.prev = &dim1;
 DIMENSIONS dim = {0, 9, &dim1, NULL};
 dim1.prev = &dim;
 std::cout<< "Total number of inner arrays = " << dim.getDimensionsOfArray().getNumberOfInnerArrays() << std::endl;
-std::cout<< "Total number of links = " << dim.getNumberOfLinks() << std::endl;
+// The number of links of doubly linkedlist.
+std::cout<< "Total number of inner arrays = " << dim.getDimensionsOfArray().getNumberOfInnerArrays() << std::endl;
+std::cout<< "Total number of links of dim = " << dim.getNumberOfLinks() << std::endl;
+DIMENSIONS copyOfDim = *dim.copy();
+std::cout<< "Total number of links of copyOfDim = " << copyOfDim.getNumberOfLinks() << std::endl;
+if (dim.getDimensionsOfArray().compare(copyOfDim.getDimensionsOfArray()))
+{
+    std::cout<< "'dim' and 'copyOfDim', both have same number of inner arrays" << std::endl;
+}
 ```
 
 ## `Collective` Class
