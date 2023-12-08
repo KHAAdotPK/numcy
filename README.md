@@ -121,4 +121,4 @@ Collective<float> zerosArray = Numcy::zeros<float>({0, 1, &shape, NULL});
 If you find issues or have suggestions for improvement, feel free to contribute!
 
 ## License
-This project is licensed under a license, the copy of which can be found in file - see the LICENSE file for details.
+This project is governed by a license, the details of which can be located in the accompanying file named 'LICENSE.' Please refer to this file for comprehensive information.
