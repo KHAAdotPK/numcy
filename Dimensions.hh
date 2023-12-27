@@ -30,15 +30,85 @@ typedef struct Dimensions
         struct Dimensions* prev;
 
     public:
-        
-    Dimensions(cc_tokenizer::string_character_traits<char>::size_type c, cc_tokenizer::string_character_traits<char>::size_type r, struct Dimensions* n, struct Dimensions* p) : columns(c), rows(r), next(n), prev(p)
+
+    Dimensions (DIMENSIONSOFARRAY dimensionsOfArray) : columns(0), rows(0), next(NULL), prev(NULL) 
+    {        
+        if (dimensionsOfArray.size())
+        {
+            cc_tokenizer::string_character_traits<char>::size_type i = 1;
+            Dimensions* current = NULL;
+
+            while (i < (dimensionsOfArray.size() - 1))
+            {
+                if (current == NULL)
+                {
+                    rows = dimensionsOfArray[0];
+                    next = reinterpret_cast<Dimensions*>(cc_tokenizer::allocator<char>().allocate(sizeof(DIMENSIONS)));
+                    current = next;
+                    current->rows = dimensionsOfArray[i];
+                    current->columns = 0;
+                    current->next = NULL;
+                    current->prev = this;                    
+                }
+                else 
+                {
+                    current->next = reinterpret_cast<Dimensions*>(cc_tokenizer::allocator<char>().allocate(sizeof(DIMENSIONS)));
+                    current->next->next = NULL;
+                    current->next->prev = current;
+                    current = current->next;
+
+                    current->rows = dimensionsOfArray[i];
+                    current->columns = 0;
+                }
+
+                i = i + 1;
+            }
+
+            current->columns = dimensionsOfArray[i];
+        }
+    }
+
+    Dimensions(Dimensions& ref) : columns(ref.columns), rows(ref.rows), next(ref.next), prev(ref.prev)
     {
 
     }
+        
+    Dimensions(cc_tokenizer::string_character_traits<char>::size_type c, cc_tokenizer::string_character_traits<char>::size_type r, struct Dimensions* n, struct Dimensions* p) : columns(c), rows(r), next(n), prev(p)
+    {
+    }
 
     ~Dimensions()
-    {                
+    {         
+        Dimensions* current = next;
+        
         if (next != NULL)
+        {
+            while (1)
+            {
+                if (current->next == NULL)
+                {
+                    break;
+                }
+
+                current = current->next;
+            }
+
+            while (1)
+            {
+                Dimensions* local = current->prev;
+
+                cc_tokenizer::allocator<char>().deallocate(reinterpret_cast<char*>(current));
+
+                if (local == NULL || local == this)
+                {
+                    break;
+                }
+
+                current = local;
+            }
+        }
+                
+        /*if (next != NULL)
         {
             Dimensions* current = next;
 
@@ -54,7 +124,7 @@ typedef struct Dimensions
                     break;
                 }    
             }                
-        }
+        }*/
 
         //std::cout<<"In the destructor...."<<std::endl;        
     }
