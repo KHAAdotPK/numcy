@@ -22,7 +22,7 @@ struct Collective
     public:        
         DIMENSIONS shape;
 
-        Collective (void) : ptr(NULL), shape({0, 0, NULL, NULL}), reference_count(1)
+        Collective (void) : ptr(NULL), shape(Dimensions{0, 0, NULL, NULL}), reference_count(1)
         {        
         }
 
