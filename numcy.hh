@@ -17,6 +17,13 @@ class Numcy
         class Random
         {
             public:
+            
+                static void randn(DIMENSIONS& dim) throw (ala_exception)
+                {
+                    // TODO,
+                    std::cout<< dim.getN() << std::endl;    
+                }
+
                 /*
                     Return random integers from low (inclusive) to high (exclusive).
                  */
