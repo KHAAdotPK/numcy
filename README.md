@@ -77,23 +77,40 @@ The `Dimensions` class represents the shape and size of a multi-dimensional arra
     Example:
         dim (0, 9) -> dim1 (0, 78) -> dim2 (0, 10) -> dim3 (10, 3)
 */
-DIMENSIONS dim3 = {10, 3, NULL, NULL};
-DIMENSIONS dim2 = {0, 10, &dim3, NULL};
-dim3.prev = &dim2;
-DIMENSIONS dim1 = {0, 78, &dim2, NULL};
-dim2.prev = &dim1;
-DIMENSIONS dim = {0, 9, &dim1, NULL};
-dim1.prev = &dim;
-std::cout<< "Total number of inner arrays = " << dim.getDimensionsOfArray().getNumberOfInnerArrays() << std::endl;
-// The number of links of doubly linkedlist.
-std::cout<< "Total number of inner arrays = " << dim.getDimensionsOfArray().getNumberOfInnerArrays() << std::endl;
-std::cout<< "Total number of links of dim = " << dim.getNumberOfLinks() << std::endl;
-DIMENSIONS copyOfDim = *dim.copy();
-std::cout<< "Total number of links of copyOfDim = " << copyOfDim.getNumberOfLinks() << std::endl;
-if (dim.getDimensionsOfArray().compare(copyOfDim.getDimensionsOfArray()))
-{
-    std::cout<< "'dim' and 'copyOfDim', both have same number of inner arrays" << std::endl;
-}
+cc_tokenizer::string_character_traits<char>::size_type *ptr = cc_tokenizer::allocator<cc_tokenizer::string_character_traits<char>::size_type>().allocate(5);
+   
+    // I died a little
+    ptr[0] = 9;
+    ptr[1] = 78;
+    ptr[2] = 10;
+    ptr[3] = 3;
+    ptr[4] = 10;
+
+    DIMENSIONSOFARRAY dimensionsOfArray(ptr, 5);
+
+    DIMENSIONS dim(dimensionsOfArray);
+
+    std::cout<< "Number of inner arrays = " << dimensionsOfArray.getNumberOfInnerArrays() << std::endl;
+    std::cout<< "Size of inner most array = " << dimensionsOfArray[dimensionsOfArray.size() - 1] << std::endl;
+    std::cout<< "Size = " << dimensionsOfArray.size() << std::endl;
+    
+    for (int i = 0; i < dimensionsOfArray.size(); i++)
+    {
+        std::cout<< dimensionsOfArray[i] << " ";
+    }
+    
+    DIMENSIONS_PTR current = dim.copy();
+
+    std::cout<< "\nDimensions... " << std::endl;
+    while (current != NULL)
+    {
+        std::cout<< "Columns: " << current->columns << ", Rows: " << current->rows << std::endl;        
+        current = current->next;
+    }
+
+    std::cout<< "Size of array: " << dim.getN() << std::endl; 
+
+    cc_tokenizer::allocator<cc_tokenizer::string_character_traits<char>::size_type>().deallocate(ptr);
 ```
 
 ## `Collective` Class
